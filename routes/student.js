@@ -16,7 +16,17 @@ router.get('/', function(req, res, next) {
     res.json(students)
   );
 });
-
+//===================POST============================
+router.post('/', async (req, res, next) => {
+  try {
+    const newStudent = await Student.create(req.body)
+    res.json(newStudent)
+  } catch (error) {
+    console.error(error)
+    next(error)
+  }
+})
+//===================================================
 router.put('/:id', function(req, res, next) {
   Student.update(req.body, {
     where: {
